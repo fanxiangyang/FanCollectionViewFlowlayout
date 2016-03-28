@@ -14,6 +14,12 @@
 		669F581B1CA8C4AE006FE6F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669F58191CA8C4AE006FE6F0 /* LaunchScreen.storyboard */; };
 		669F58261CA8C4AE006FE6F0 /* FanCollectionViewFlowlayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F58251CA8C4AE006FE6F0 /* FanCollectionViewFlowlayoutTests.swift */; };
 		669F58311CA8C4AE006FE6F0 /* FanCollectionViewFlowlayoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F58301CA8C4AE006FE6F0 /* FanCollectionViewFlowlayoutUITests.swift */; };
+		669F58421CA8C546006FE6F0 /* head1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 669F58401CA8C546006FE6F0 /* head1@2x.png */; };
+		669F58431CA8C546006FE6F0 /* head2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 669F58411CA8C546006FE6F0 /* head2@2x.png */; };
+		669F58461CA8C55D006FE6F0 /* FanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F58441CA8C55D006FE6F0 /* FanCell.swift */; };
+		669F58471CA8C55D006FE6F0 /* FanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 669F58451CA8C55D006FE6F0 /* FanCell.xib */; };
+		669F58491CA8C7A3006FE6F0 /* FanCollectionViewFlowlayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F58481CA8C7A3006FE6F0 /* FanCollectionViewFlowlayout.swift */; };
+		669F584B1CA8C85C006FE6F0 /* SuppleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F584A1CA8C85C006FE6F0 /* SuppleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,12 @@
 		669F582C1CA8C4AE006FE6F0 /* FanCollectionViewFlowlayoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FanCollectionViewFlowlayoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		669F58301CA8C4AE006FE6F0 /* FanCollectionViewFlowlayoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanCollectionViewFlowlayoutUITests.swift; sourceTree = "<group>"; };
 		669F58321CA8C4AE006FE6F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		669F58401CA8C546006FE6F0 /* head1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "head1@2x.png"; sourceTree = "<group>"; };
+		669F58411CA8C546006FE6F0 /* head2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "head2@2x.png"; sourceTree = "<group>"; };
+		669F58441CA8C55D006FE6F0 /* FanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanCell.swift; sourceTree = "<group>"; };
+		669F58451CA8C55D006FE6F0 /* FanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FanCell.xib; sourceTree = "<group>"; };
+		669F58481CA8C7A3006FE6F0 /* FanCollectionViewFlowlayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanCollectionViewFlowlayout.swift; sourceTree = "<group>"; };
+		669F584A1CA8C85C006FE6F0 /* SuppleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuppleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +109,14 @@
 		669F580F1CA8C4AE006FE6F0 /* FanCollectionViewFlowlayout */ = {
 			isa = PBXGroup;
 			children = (
+				669F583F1CA8C53C006FE6F0 /* Images */,
+				669F583E1CA8C518006FE6F0 /* FanCollectionViewFlowlayout */,
 				669F58101CA8C4AE006FE6F0 /* AppDelegate.swift */,
 				669F58121CA8C4AE006FE6F0 /* ViewController.swift */,
 				669F58141CA8C4AE006FE6F0 /* Main.storyboard */,
+				669F58441CA8C55D006FE6F0 /* FanCell.swift */,
+				669F58451CA8C55D006FE6F0 /* FanCell.xib */,
+				669F584A1CA8C85C006FE6F0 /* SuppleView.swift */,
 				669F58171CA8C4AE006FE6F0 /* Assets.xcassets */,
 				669F58191CA8C4AE006FE6F0 /* LaunchScreen.storyboard */,
 				669F581C1CA8C4AE006FE6F0 /* Info.plist */,
@@ -123,6 +140,23 @@
 				669F58321CA8C4AE006FE6F0 /* Info.plist */,
 			);
 			path = FanCollectionViewFlowlayoutUITests;
+			sourceTree = "<group>";
+		};
+		669F583E1CA8C518006FE6F0 /* FanCollectionViewFlowlayout */ = {
+			isa = PBXGroup;
+			children = (
+				669F58481CA8C7A3006FE6F0 /* FanCollectionViewFlowlayout.swift */,
+			);
+			path = FanCollectionViewFlowlayout;
+			sourceTree = "<group>";
+		};
+		669F583F1CA8C53C006FE6F0 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				669F58401CA8C546006FE6F0 /* head1@2x.png */,
+				669F58411CA8C546006FE6F0 /* head2@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,8 +263,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669F58421CA8C546006FE6F0 /* head1@2x.png in Resources */,
 				669F581B1CA8C4AE006FE6F0 /* LaunchScreen.storyboard in Resources */,
 				669F58181CA8C4AE006FE6F0 /* Assets.xcassets in Resources */,
+				669F58431CA8C546006FE6F0 /* head2@2x.png in Resources */,
+				669F58471CA8C55D006FE6F0 /* FanCell.xib in Resources */,
 				669F58161CA8C4AE006FE6F0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,8 +293,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669F58461CA8C55D006FE6F0 /* FanCell.swift in Sources */,
 				669F58131CA8C4AE006FE6F0 /* ViewController.swift in Sources */,
+				669F58491CA8C7A3006FE6F0 /* FanCollectionViewFlowlayout.swift in Sources */,
 				669F58111CA8C4AE006FE6F0 /* AppDelegate.swift in Sources */,
+				669F584B1CA8C85C006FE6F0 /* SuppleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
