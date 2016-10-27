@@ -10,13 +10,13 @@ import UIKit
 class SuppleView: UICollectionReusableView {
     var titleLabel:UILabel?
     override func awakeFromNib() {
-        titleLabel=UILabel(frame: CGRectMake(0,0,100,20))
+        titleLabel=UILabel(frame: CGRect(x: 0,y: 0,width: 100,height: 20))
         self.addSubview(titleLabel!)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        titleLabel=UILabel(frame: CGRectMake(0,0,100,20))
+        titleLabel=UILabel(frame: CGRect(x: 0,y: 0,width: 100,height: 20))
         self.addSubview(titleLabel!)
     }
 

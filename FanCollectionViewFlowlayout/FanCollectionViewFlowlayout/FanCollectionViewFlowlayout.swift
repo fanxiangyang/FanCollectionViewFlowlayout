@@ -10,16 +10,16 @@ import UIKit
 
 class FanCollectionViewFlowlayout: UICollectionViewFlowLayout {
     var naviHeight:CGFloat=0.0//默认分组停放高度
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         //UICollectionViewLayoutAttributes：我称它为collectionView中的item（包括cell和header、footer这些）的结构信息
         //截取到父类所返回的数组（里面放的是当前屏幕所能展示的item的结构信息），并转化成不可变数组
-        var superArray = super.layoutAttributesForElementsInRect(rect)
+        var superArray = super.layoutAttributesForElements(in: rect)
         //创建存索引的数组，无符号（正整数），无序（不能通过下标取值），不可重复（重复的话会自动过滤）
         let noneHeaderSections=NSMutableIndexSet();
         for  attributes:UICollectionViewLayoutAttributes in superArray! {
             //如果当前的元素分类是一个cell，将cell所在的分区section加入数组，重复的话会自动过滤
-            if attributes.representedElementCategory == .Cell{
-                noneHeaderSections.addIndex(attributes.indexPath.section)
+            if attributes.representedElementCategory == .cell{
+                noneHeaderSections.add((attributes.indexPath as NSIndexPath).section)
             }
         }
         //遍历superArray，将当前屏幕中拥有的header的section从数组中移除，得到一个当前屏幕中没有header的section数组
@@ -27,42 +27,42 @@ class FanCollectionViewFlowlayout: UICollectionViewFlowLayout {
         for attributes:UICollectionViewLayoutAttributes in superArray! {
             //如果当前的元素是一个header，将header所在的section从数组中移除
             if attributes.representedElementKind == UICollectionElementKindSectionHeader {
-                noneHeaderSections.removeIndex(attributes.indexPath.section)
+                noneHeaderSections.remove((attributes.indexPath as NSIndexPath).section)
             }
         }
         //遍历当前屏幕中没有header的section数组
-        noneHeaderSections .enumerateIndexesUsingBlock { (idx, obj) -> Void in
+        noneHeaderSections .enumerate ({ idx, obj-> Void in
             //取到当前section中第一个item的indexPath
-            let indexPath=NSIndexPath(forItem: 0, inSection: idx)
-            let attributes=self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionHeader, atIndexPath: indexPath)
+            let indexPath=IndexPath(item: 0, section: idx)
+            let attributes=self.layoutAttributesForSupplementaryView(ofKind: UICollectionElementKindSectionHeader, at: indexPath)
             //如果当前分区确实有因为离开屏幕而被系统回收的header
             if attributes != nil {
                 //将该header结构信息重新加入到superArray中去
                 superArray?.append(attributes!)
             }
-        }
+        })
         //遍历superArray，改变header结构信息中的参数，使它可以在当前section还没完全离开屏幕的时候一直显示
         for  attributes:UICollectionViewLayoutAttributes in superArray! {
             //如果当前item是header
             if attributes.representedElementKind == UICollectionElementKindSectionHeader {
                 //得到当前header所在分区的cell的数量
-                let numberOfItemsInSection=self.collectionView!.numberOfItemsInSection(attributes.indexPath.section)
+                let numberOfItemsInSection=self.collectionView!.numberOfItems(inSection: (attributes.indexPath as NSIndexPath).section)
                 //取到当前section中第一个item的indexPath
-                let firstItemIndexPath=NSIndexPath(forItem: 0, inSection: attributes.indexPath.section)
+                let firstItemIndexPath=IndexPath(item: 0, section: (attributes.indexPath as NSIndexPath).section)
                 //得到最后一个item的indexPath
-                let lastItemIndexPath=NSIndexPath(forItem: max(0, numberOfItemsInSection-1), inSection: attributes.indexPath.section)
+                let lastItemIndexPath=IndexPath(item: max(0, numberOfItemsInSection-1), section: (attributes.indexPath as NSIndexPath).section)
                 //得到第一个item和最后一个item的结构信息
                 var firstItemAttributes, lastItemAttributes:UICollectionViewLayoutAttributes
                 if numberOfItemsInSection>0 {
                     //cell有值，则获取第一个cell和最后一个cell的结构信息
-                    firstItemAttributes=self.layoutAttributesForItemAtIndexPath(firstItemIndexPath)!
-                    lastItemAttributes=self.layoutAttributesForItemAtIndexPath(lastItemIndexPath)!
+                    firstItemAttributes=self.layoutAttributesForItem(at: firstItemIndexPath)!
+                    lastItemAttributes=self.layoutAttributesForItem(at: lastItemIndexPath)!
                 }else{
                     //cell没值,就新建一个UICollectionViewLayoutAttributes
                     firstItemAttributes=UICollectionViewLayoutAttributes()
                     //然后模拟出在当前分区中的唯一一个cell，cell在header的下面，高度为0，还与header隔着可能存在的sectionInset的top
-                    let y=CGRectGetMaxY(attributes.frame) + sectionInset.top
-                    firstItemAttributes.frame=CGRectMake(0, y, 0, 0)
+                    let y=attributes.frame.maxY + sectionInset.top
+                    firstItemAttributes.frame=CGRect(x: 0, y: y, width: 0, height: 0)
                     //因为只有一个cell，所以最后一个cell等于第一个cell
                     lastItemAttributes=firstItemAttributes;
                 }
@@ -77,7 +77,7 @@ class FanCollectionViewFlowlayout: UICollectionViewFlowLayout {
                 let maxY=max(offset, headerY)
                 //最后一个cell的y值 + 最后一个cell的高度 + 可能存在的sectionInset的bottom - 当前header的高度
                 //当当前section的footer或者下一个section的header接触到当前header的底部，计算出的headerMissingY即为有效值
-                let headerMissingY = CGRectGetMaxY(lastItemAttributes.frame) + sectionInset.bottom - rect.size.height;
+                let headerMissingY = lastItemAttributes.frame.maxY + sectionInset.bottom - rect.size.height;
                 //给rect的y赋新值，因为在最后消失的临界点要跟谁消失，所以取小
                 rect.origin.y=min(maxY, headerMissingY)
                 //给header的结构信息的frame重新赋值
@@ -91,7 +91,7 @@ class FanCollectionViewFlowlayout: UICollectionViewFlowLayout {
         return superArray
     }
     //return true;表示一旦滑动就实时调用上面这个layoutAttributesForElementsInRect:方法
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
 
